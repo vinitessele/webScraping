@@ -1,7 +1,7 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
 
-class CitaçõesSpider(scrapy.Spider):
+class CitacoesSpider(scrapy.Spider):
     name = "citações"
     start_urls = ['http://quotes.toscrape.com/']
 
@@ -19,5 +19,5 @@ process = CrawlerProcess(settings={
     },
 })
 
-process.crawl(CitaçõesSpider)
+process.crawl(CitacoesSpider)
 process.start() 

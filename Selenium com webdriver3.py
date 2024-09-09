@@ -20,19 +20,17 @@ try:
     driver.get("https://www.wikipedia.org/")
     
     # Aguarda até que o campo de busca esteja presente
-    time.sleep(5)  # Espera 5 segundos
+    time.sleep(5)
     search_box = driver.find_element(By.ID, "searchInput")
 
     # Envia uma consulta para o campo de busca
     search_box.send_keys("Selenium (software)")
-
-    # Envia o formulário de busca
     search_box.submit()
 
     # Aguarda a página de resultados carregar
-    WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "firstHeading"))
-    )
+    time.sleep(5) 
+    page_title = driver.find_element(By.ID, "firstHeading").text
+    print(f"Título da Página: {page_title}")
 
     # Extrai o título da página de resultados
     page_title = driver.find_element(By.ID, "firstHeading").text
