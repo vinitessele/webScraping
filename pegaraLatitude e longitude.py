@@ -42,6 +42,7 @@ def buscar_municipio_por_codigo(codigo, municipios):
 # Função para geocodificar o endereço e calcular a distância
 def get_lat_long_e_calcular_distancia(row, origem):
     geolocator = Nominatim(user_agent="http")
+    
     try:
         municipio = buscar_municipio_por_codigo(row['id_municipio'], municipios)
 
@@ -51,9 +52,7 @@ def get_lat_long_e_calcular_distancia(row, origem):
             municipio = dadosconsulta.get("municipio")
 
         # Monta o endereço utilizando a string municipio corretamente
-        endereco = f"{row['logradouro']} {row['numero']}, {municipio} {row['sigla_uf']}, Brasil"
-
-     
+        endereco = f" {row['numero'].strip()} {row['logradouro'].strip()}, {municipio} {row['sigla_uf'].strip()}, Brasil".strip()
         location = geolocator.geocode(endereco)
             
         # Caso não encontre o endereço completo, tenta buscar pelo CEP
@@ -80,7 +79,7 @@ def get_lat_long_e_calcular_distancia(row, origem):
             return pd.Series([None, None, None])
     except Exception as e:
         print(f"Erro na geocodificação para o endereço: {endereco}. Erro: {e}")
-        return pd.Series([None, None, None])
+        #return pd.Series([None, None, None])
 
 # Define o ponto de origem (latitude, longitude)
 origem = (-24.6175656, -53.7120884)  # Coordenadas de referência
